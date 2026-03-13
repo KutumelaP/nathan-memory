@@ -1,0 +1,57 @@
+{
+  "pageTitle": "In Loving Memory",
+  "headline": "I am with you, always in spirit",
+  "subheadline": "A page of moments, kept alive",
+  "intro": "This QR is a doorway to stories, photos, and messages. When you miss them, come here—add a memory, read one, and let love stay close.",
+  "lastUpdated": "2026-03-13",
+  "images": {
+    "hero": {
+      "src": "assets/framed-photo.jpg",
+      "fallbackSrc": "assets/placeholder-framed.svg",
+      "alt": "Framed memory photo"
+    },
+    "poster": {
+      "src": "assets/message-poster.jpg",
+      "fallbackSrc": "assets/placeholder-poster.svg",
+      "alt": "Message poster"
+    }
+  },
+  "audio": {
+    "enabled": false,
+    "src": "assets/audio.mp3",
+    "label": "A voice note or song"
+  },
+  "timeline": [
+    {
+      "when": "A moment I’ll never forget",
+      "what": "Their laugh",
+      "note": "That laugh that could turn a heavy day into light."
+    },
+    {
+      "when": "A lesson",
+      "what": "Never stop praying",
+      "note": "Walk with God in every season of life."
+    },
+    {
+      "when": "A place",
+      "what": "Home",
+      "note": "Where love felt like a blanket."
+    }
+  ],
+  "gallery": [
+    {
+      "src": "assets/gallery-1.jpg",
+      "alt": "Memory photo 1"
+    },
+    {
+      "src": "assets/gallery-2.jpg",
+      "alt": "Memory photo 2"
+    }
+  ],
+  "memoryWall": {
+    "enabled": true,
+    "storageKey": "qr_memory_brain_wall_v1",
+    "privacyNote": "Notes save on the visitor's device (private by default). Use Export to collect them."
+  }
+}
+

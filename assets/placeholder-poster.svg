@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="1500" viewBox="0 0 1200 1500">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#0b0c10"/>
+      <stop offset="1" stop-color="#10121a"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="1500" fill="url(#bg)"/>
+  <rect x="80" y="90" width="1040" height="1320" rx="42" fill="rgba(255,255,255,.03)" stroke="rgba(255,255,255,.10)" stroke-width="2"/>
+  <g font-family="Segoe UI, Arial, sans-serif" text-anchor="middle">
+    <text x="600" y="330" font-size="34" font-weight="700" fill="#ececf2">Add your message poster</text>
+    <text x="600" y="395" font-size="20" fill="#b9bcc7">Replace <tspan fill="#c9a86a">assets/message-poster.jpg</tspan></text>
+    <text x="600" y="520" font-size="22" fill="#ececf2" opacity=".92">I am with you, always in spirit.</text>
+    <text x="600" y="575" font-size="16" fill="#b9bcc7" opacity=".9">This page becomes the memory behind the QR.</text>
+  </g>
+  <g opacity=".22">
+    <path d="M150 1180 C 350 980, 540 1320, 750 1100 S 1100 1260, 1070 980"
+          fill="none" stroke="#c9a86a" stroke-width="6" stroke-linecap="round"/>
+  </g>
+</svg>
+

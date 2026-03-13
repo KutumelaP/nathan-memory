@@ -1,0 +1,710 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>I Am With You, Always in Spirit</title>
+  <style>
+    :root {
+      --bg: #05070c;
+      --bg2: #0f1119;
+      --accent: #c9a86a;
+      --accent-soft: rgba(201,168,106,.15);
+      --text: #f3f3f6;
+      --muted: #b3b6c2;
+      --card: rgba(8,10,18,.9);
+      --line: rgba(255,255,255,.09);
+      --radius: 22px;
+      --shadow: 0 26px 70px rgba(0,0,0,.7);
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; height: 100%; }
+    body {
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(1200px 700px at 10% 0%, rgba(201,168,106,.18), transparent 55%),
+        radial-gradient(1200px 700px at 100% 10%, rgba(112,85,195,.2), transparent 60%),
+        linear-gradient(180deg, var(--bg), var(--bg2));
+    }
+    .page {
+      min-height: 100vh;
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 18px 16px 60px;
+    }
+    header {
+      padding: 10px 4px 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+    header h1 {
+      margin: 0;
+      font-size: 18px;
+      letter-spacing: .2px;
+    }
+    header p {
+      margin: 0;
+      font-size: 12px;
+      color: var(--muted);
+    }
+    .pill {
+      padding: 6px 12px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: rgba(0,0,0,.45);
+      color: var(--muted);
+      font-size: 11px;
+      white-space: nowrap;
+    }
+
+    .hero {
+      position: relative;
+      border-radius: 26px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      border: 1px solid rgba(255,255,255,.08);
+      background: radial-gradient(circle at top, rgba(201,168,106,.25), rgba(8,9,14,.95));
+    }
+    .hero-inner {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr);
+      gap: 0;
+    }
+    @media (max-width: 800px) {
+      .hero-inner { grid-template-columns: 1fr; }
+    }
+
+    .hero-image {
+      position: relative;
+      min-height: 280px;
+      overflow: hidden;
+    }
+    .hero-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transform: scale(1.04);
+      filter: saturate(1.05);
+      opacity: 0;
+      animation: fadeInPoster 1.6s ease-out forwards;
+    }
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at center, transparent 0, rgba(0,0,0,.45) 52%);
+      pointer-events: none;
+    }
+    .hero-text {
+      padding: 24px 24px 22px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 12px;
+      background: linear-gradient(145deg, rgba(8,9,14,.95), rgba(8,10,16,.8));
+    }
+    .hero-text h2 {
+      margin: 0;
+      font-size: 26px;
+      letter-spacing: .3px;
+    }
+    .hero-text p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.6;
+    }
+    .script-line {
+      font-family: "Georgia", "Times New Roman", serif;
+      font-style: italic;
+      color: var(--accent);
+      font-size: 16px;
+    }
+    .meta {
+      margin-top: 6px;
+      font-size: 11px;
+      color: var(--muted);
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .cta-row {
+      margin-top: 16px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+    }
+    .btn {
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.22);
+      padding: 9px 16px;
+      font-size: 13px;
+      font-weight: 600;
+      background: linear-gradient(120deg, var(--accent), #f3e0b0);
+      color: #1b1407;
+      cursor: pointer;
+      box-shadow: 0 10px 28px rgba(0,0,0,.55);
+    }
+    .btn-ghost {
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: rgba(0,0,0,.35);
+      color: var(--muted);
+      padding: 9px 14px;
+      font-size: 12px;
+    }
+
+    section {
+      margin-top: 26px;
+      border-radius: var(--radius);
+      background: var(--card);
+      border: 1px solid var(--line);
+      box-shadow: 0 18px 50px rgba(0,0,0,.6);
+      padding: 18px 18px 20px;
+    }
+    section h3 {
+      margin: 0 0 8px;
+      font-size: 16px;
+      letter-spacing: .2px;
+    }
+    section p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.6;
+    }
+    .split {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr);
+      gap: 18px;
+      margin-top: 12px;
+    }
+    @media (max-width: 800px) {
+      .split { grid-template-columns: 1fr; }
+    }
+
+    .frame {
+      border-radius: 20px;
+      padding: 10px;
+      border: 1px solid rgba(201,168,106,.25);
+      background: radial-gradient(circle at top, rgba(201,168,106,.15), rgba(5,6,10,.95));
+    }
+    .frame img, .frame video {
+      width: 100%;
+      display: block;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,.10);
+      max-height: 420px;
+      object-fit: cover;
+    }
+    .caption {
+      margin-top: 8px;
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .prayer {
+      margin-top: 12px;
+      padding: 14px 14px 12px;
+      border-radius: 16px;
+      background: radial-gradient(circle at 0 0, var(--accent-soft), transparent 60%);
+      border: 1px solid rgba(201,168,106,.3);
+      font-size: 14px;
+      line-height: 1.7;
+    }
+
+    .candle-area {
+      margin-top: 12px;
+      padding: 12px 12px 10px;
+      border-radius: 16px;
+      border: 1px dashed rgba(201,168,106,.4);
+      background: radial-gradient(circle at 50% 0, rgba(201,168,106,.18), transparent 65%);
+      font-size: 13px;
+      color: var(--muted);
+    }
+    .candle-row {
+      margin-top: 10px;
+      min-height: 40px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: flex-end;
+    }
+    .candle {
+      width: 18px;
+      height: 32px;
+      border-radius: 8px 8px 4px 4px;
+      background: linear-gradient(180deg, #ffe6b3, #f2b36b);
+      position: relative;
+      box-shadow: 0 0 12px rgba(255,198,120,.9);
+      animation: candleGlow 2.4s ease-in-out infinite alternate;
+    }
+    .candle:before {
+      content: "";
+      position: absolute;
+      left: 50%;
+      top: -14px;
+      width: 10px;
+      height: 18px;
+      margin-left: -5px;
+      border-radius: 50% 50% 40% 40%;
+      background: radial-gradient(circle at 50% 0, #fff7e6 0, #ffc46b 60%, rgba(255,140,0,0) 100%);
+      animation: flameFlicker 1.7s ease-in-out infinite alternate;
+    }
+
+    footer {
+      margin-top: 26px;
+      font-size: 11px;
+      color: var(--muted);
+      text-align: center;
+      opacity: .8;
+    }
+
+    @keyframes fadeInPoster {
+      from { opacity: 0; transform: scale(1.06); filter: blur(2px); }
+      to   { opacity: 1; transform: scale(1.02); filter: blur(0); }
+    }
+    @keyframes candleGlow {
+      from { box-shadow: 0 0 10px rgba(255,198,120,.5); transform: translateY(0); }
+      to   { box-shadow: 0 0 18px rgba(255,198,120,1); transform: translateY(-2px); }
+    }
+    @keyframes flameFlicker {
+      from { transform: translateX(-1px) scaleY(1); opacity: .9; }
+      to   { transform: translateX(1px) scaleY(1.1); opacity: 1; }
+    }
+
+    .fade-section {
+      opacity: 0;
+      transform: translateY(12px);
+      transition: opacity .9s ease-out, transform .9s ease-out;
+    }
+    .fade-section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header>
+      <div>
+        <h1>I Am With You, Always in Spirit</h1>
+        <p>A doorway of memory, prayer, and family.</p>
+      </div>
+      <div class="pill">Scan • Remember • Pray</div>
+    </header>
+
+    <!-- HERO: full-screen style poster -->
+    <main class="hero" id="top">
+      <div class="hero-inner">
+        <div class="hero-image">
+          <!-- Replace poster.jpg with your first picture filename -->
+          <img src="poster.jpg" alt="Encouraging prayer poster" />
+          <div class="hero-overlay"></div>
+        </div>
+        <div class="hero-text">
+          <div class="script-line">“My son, never stop praying.”</div>
+          <p>
+            This frame on the wall is more than paper and ink. It is a doorway
+            back to the words that carried us, the seasons that shaped us, and
+            the God who never left our side.
+          </p>
+          <p>
+            Whenever the world feels heavy, come here. Breathe. Read slowly.
+            Let these memories remind you who you are, where you come from,
+            and how deeply you are loved.
+          </p>
+          <div class="meta">
+            <span>Deuteronomy 28:1,18</span>
+            <span>Kutumela &mdash; 2026</span>
+          </div>
+          <div class="cta-row">
+            <button class="btn" id="walkBtn">Tap to walk through this memory</button>
+            <div class="btn-ghost">Scroll at your own pace.</div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- SECTION 1: The pencil drawing -->
+    <section id="section-story" class="fade-section">
+      <h3>Where our story stands in pencil</h3>
+      <p>
+        One day, long ago, you were this small. The ground beneath us was rough,
+        the future uncertain, but love was steady. This drawing is our witness:
+        you were held, you were prayed over, and you were deeply wanted.
+      </p>
+      <div class="split" style="margin-top:14px;">
+        <div class="frame">
+          <!-- Replace drawing.jpg with the framed drawing photo -->
+          <img src="drawing.jpg" alt="Father kneeling, holding his child" />
+          <div class="caption">
+            This is a moment we froze in time. Every time you see it, remember:
+            you were carried, you are chosen, and you have a place in this family.
+          </div>
+        </div>
+        <div>
+          <div class="prayer">
+            Father, thank You for this child. For every step already taken
+            and every road still ahead. When the storms come, remind him to
+            kneel, to listen, and to walk with You in every season of life.
+          </div>
+          <p style="margin-top:12px;">
+            If you are reading this on a hard day: pause.
+            Whisper the simplest prayer you can. Even two words:
+            <strong>“God, help.”</strong> That is enough for Heaven to hear.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 1B: Life journey -->
+    <section id="section-journey" class="fade-section">
+      <h3>My road so far &mdash; Peter Kutumela</h3>
+      <p>
+        Nathan, this is a small map of my life so far. It is not perfect,
+        but it is honest. I want you to know the road I walked before you
+        arrived, and the road I am still walking beside you.
+      </p>
+      <div class="split" style="margin-top:14px;">
+        <div>
+          <div style="border-radius:16px; border:1px solid var(--line); padding:10px 12px; background:rgba(0,0,0,.55);">
+            <div style="font-size:13px; color:var(--accent); font-weight:600; margin-bottom:6px;">Timeline</div>
+            <ul style="margin:0; padding-left:16px; font-size:13px; color:var(--muted); line-height:1.7;">
+              <li><strong>Growing up:</strong> Learning to pray, to share, and to survive when money was tight.</li>
+              <li><strong>Young man:</strong> Working, making mistakes, and learning that God can rebuild what I thought was lost.</li>
+              <li><strong>The day you arrived:</strong> My whole idea of “future” changed. It suddenly had your face.</li>
+              <li><strong>Hard seasons:</strong> Times when I almost gave up, but prayer and family pulled me back.</li>
+              <li><strong>Today:</strong> Still learning, still trusting, and trying to build something strong enough for you to stand on.</li>
+            </ul>
+          </div>
+        </div>
+        <div>
+          <div class="prayer">
+            Lord, thank You for every season that shaped Peter Kutumela.
+            Thank You that none of his story is wasted. Use his journey to
+            guide Nathan, so that he can walk further, make wiser choices,
+            and know You even more deeply.
+          </div>
+          <p style="margin-top:12px; font-size:13px; color:var(--muted);">
+            One day you will add your own milestones here, Nathan. This story
+            is still being written, and yours is only beginning.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 1B2: From your mother -->
+    <section id="section-mom" class="fade-section">
+      <h3>From your mother, Lerato</h3>
+      <p>
+        Nathan, I am Lerato, your mother. I walked my own road before I joined
+        the Kutumela family, and God knew that one day our paths would meet in you.
+        This is a small piece of my story, given to you with love.
+      </p>
+      <div class="split" style="margin-top:14px;">
+        <div>
+          <div style="border-radius:16px; border:1px solid var(--line); padding:10px 12px; background:rgba(0,0,0,.55);">
+            <div style="font-size:13px; color:var(--accent); font-weight:600; margin-bottom:6px;">A few steps from my journey</div>
+            <ul style="margin:0; padding-left:16px; font-size:13px; color:var(--muted); line-height:1.7;">
+              <li><strong>Girlhood:</strong> Learning to be strong, kind, and careful with the hearts God placed around me.</li>
+              <li><strong>Becoming Lerato Kutumela:</strong> Marrying into this family and learning new ways to love, to serve, and to pray.</li>
+              <li><strong>The day you were born:</strong> My whole understanding of “mother” became real the first time I held you.</li>
+              <li><strong>Today:</strong> Still growing, still trusting God, doing my best to raise you with wisdom and joy.</li>
+            </ul>
+          </div>
+        </div>
+        <div>
+          <div class="prayer">
+            Lord, thank You for making me Nathan’s mother. Thank You for every tear,
+            every smile, every late night and early morning. Help me to love him well,
+            to speak life over him, and to show him what it looks like for a woman to
+            walk closely with You.
+          </div>
+          <p style="margin-top:12px; font-size:13px; color:var(--muted);">
+            Nathan, one day I will tell you these stories in full. For now, hold on
+            to this: you were never an accident. You are a gift that changed my life forever.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 1C: Simple family tree -->
+    <section id="section-family" class="fade-section">
+      <h3>The people you come from</h3>
+      <p>
+        You are not walking alone. You carry the prayers, strengths, and stories
+        of both your parents and the Kutumela family with you wherever you go.
+      </p>
+      <div style="margin-top:12px; padding:12px; border-radius:18px; border:1px solid var(--line); background:rgba(0,0,0,.55);">
+        <div style="display:flex; flex-direction:column; align-items:center; gap:12px; font-size:13px; color:var(--muted);">
+          <div style="display:flex; gap:10px; flex-wrap:wrap; justify-content:center;">
+            <div style="padding:6px 10px; border-radius:999px; border:1px solid var(--line); background:rgba(0,0,0,.7);">
+              Grandparents <span style="color:var(--accent); opacity:.8;">(their prayers)</span>
+            </div>
+          </div>
+          <div style="width:2px; height:14px; background:var(--line);"></div>
+          <div style="display:flex; gap:10px; flex-wrap:wrap; justify-content:center;">
+            <div style="padding:8px 12px; border-radius:999px; border:1px solid rgba(201,168,106,.5); background:rgba(0,0,0,.8);">
+              <strong>Peter Kutumela</strong> &mdash; Father, prayer warrior, builder
+            </div>
+            <div style="padding:8px 12px; border-radius:999px; border:1px solid rgba(201,168,106,.5); background:rgba(0,0,0,.8);">
+              <strong>Lerato Ledwaba</strong> &mdash; Mother, nurturer, rooted in Kutumela
+            </div>
+          </div>
+          <div style="width:2px; height:14px; background:var(--line);"></div>
+          <div style="display:flex; gap:10px; flex-wrap:wrap; justify-content:center;">
+            <div style="padding:8px 12px; border-radius:999px; border:1px solid var(--line); background:rgba(0,0,0,.8);">
+              <strong>Nathan Kutumela</strong> &mdash; Son, promise, answered prayer
+            </div>
+          </div>
+          <p style="margin:4px 0 0; font-size:12px; text-align:center;">
+            This is a simple picture for now. One day, we can add names and stories
+            to every branch, so you can see how far God has carried this family.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 1C2: My wish for you -->
+    <section id="section-wish" class="fade-section">
+      <h3>Our wish for you, Nathan</h3>
+      <p>
+        More than anything, we wish that you never stop praying. That you walk with God
+        in every season of life &mdash; when storms come, when you feel lost or afraid &mdash;
+        and that you remember: we are always with you in love and in spirit, even when
+        the world seems dark. Find courage, find peace, and hold fast to faith.
+      </p>
+      <div class="prayer" style="margin-top:12px;">
+        We wish you the strength to do what is right even when it costs you; the humility
+        to ask for help and the courage to stand when others fall. We wish you a heart
+        that forgives others and yourself, and that stays soft toward God and toward people.
+      </div>
+      <p style="margin-top:12px;">
+        We wish you work that matters and people who love you for who you are. That you
+        never forget where you come from &mdash; your mom, Lerato, and the Kutumela family &mdash;
+        and that you carry that with pride. And we wish <strong>that you achieve more in life</strong>:
+        that you go further than we did, build more, reach higher, and leave a legacy of
+        faith and love for the next generation. That you build a home where prayer and
+        love are normal, and where your own children feel safe and seen.
+      </p>
+      <p style="margin-top:10px; font-size:13px; color:var(--accent);">
+        You are our son. Our wish for you is simply this: that you become everything
+        God has already written over your life.
+      </p>
+    </section>
+
+    <!-- SECTION 1D: Pick a memory (fun cards) -->
+    <section id="section-memories" class="fade-section">
+      <h3>Pick a memory</h3>
+      <p>
+        Not every memory is serious. Some are simply here to make you smile,
+        laugh, and remember the lighter parts of love.
+      </p>
+      <div style="margin-top:12px; display:flex; flex-wrap:wrap; gap:10px;">
+        <div style="flex:1 1 180px; min-width:0; border-radius:16px; border:1px solid var(--line); background:rgba(0,0,0,.6); padding:10px 12px;">
+          <div style="font-size:13px; font-weight:600; color:var(--accent); margin-bottom:4px;">The funniest day</div>
+          <p style="margin:0; font-size:13px; color:var(--muted);">
+            Think of a moment when we laughed so hard we could not breathe.
+            One day we will write that story here, with a photo, so it never fades.
+          </p>
+        </div>
+        <div style="flex:1 1 180px; min-width:0; border-radius:16px; border:1px solid var(--line); background:rgba(0,0,0,.6); padding:10px 12px;">
+          <div style="font-size:13px; font-weight:600; color:var(--accent); margin-bottom:4px;">Most proud of you</div>
+          <p style="margin:0; font-size:13px; color:var(--muted);">
+            This space is for the day you chose what was right even when it was hard,
+            so you can always remember your own courage.
+          </p>
+        </div>
+        <div style="flex:1 1 180px; min-width:0; border-radius:16px; border:1px solid var(--line); background:rgba(0,0,0,.6); padding:10px 12px;">
+          <div style="font-size:13px; font-weight:600; color:var(--accent); margin-bottom:4px;">Did you know?</div>
+          <p style="margin:0; font-size:13px; color:var(--muted);">
+            Did you know there was a time when one of us almost gave up on a dream?
+            One day we will tell you how God turned that story around.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 2: Deuteronomy reflection video -->
+    <section id="section-media" class="fade-section">
+      <h3>Walking inside the promise</h3>
+      <p>
+        Deuteronomy does not live only on paper. In this video, its blessing
+        and warning are brought into real life &mdash; into choices, seasons,
+        and the quiet places where obedience is tested.
+      </p>
+      <div class="split" style="margin-top:14px;">
+        <div class="frame">
+          <!-- If you don’t have a video yet, you can leave this as is or remove it -->
+          <!-- Put a file called memory.mp4 next to this HTML (or change the src) -->
+          <video id="memoryVideo" controls playsinline preload="metadata" poster="drawing.jpg">
+            <source src="memory.mp4" type="video/mp4" />
+            <source src="video.mp4" type="video/mp4" />
+          </video>
+          <div class="caption" id="videoCaption">
+            This is your guided walk through Deuteronomy &mdash; what it means
+            to listen, to walk closely with God, and to remember that every step
+            has a promise and a consequence.
+          </div>
+        </div>
+        <div>
+          <p>
+            Watch slowly. If a line in the video grips your heart, pause and sit
+            with it. Ask God what He is saying to you through this chapter, in
+            this exact season of your life.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 3: Scriptures for heavy days -->
+    <section id="section-scriptures" class="fade-section">
+      <h3>Scriptures for heavy days</h3>
+      <p>
+        When your heart feels loud and heavy, come back to these verses.
+        Read them slowly, out loud if you need to, as if you are breathing them in.
+      </p>
+      <div style="margin-top:12px; padding:10px; border-radius:16px; border:1px solid var(--line); background: radial-gradient(circle at 0 0, rgba(201,168,106,.18), transparent 60%);">
+        <div style="display:flex; overflow-x:auto; gap:10px; padding-bottom:4px;">
+          <div style="min-width:190px; padding:10px 12px; border-radius:14px; background:rgba(0,0,0,.6); border:1px solid rgba(201,168,106,.4);">
+            <div style="font-size:12px; color:var(--accent); font-weight:600;">Deuteronomy 28:1–2</div>
+            <div style="font-size:12px; color:var(--muted); margin-top:4px;">“If you listen carefully… all these blessings will come on you.”</div>
+            <div style="font-size:11px; color:var(--muted); margin-top:6px;">Pray: “Lord, teach me to listen and obey today.”</div>
+          </div>
+          <div style="min-width:190px; padding:10px 12px; border-radius:14px; background:rgba(0,0,0,.6); border:1px solid var(--line);">
+            <div style="font-size:12px; color:var(--accent); font-weight:600;">Isaiah 41:10</div>
+            <div style="font-size:12px; color:var(--muted); margin-top:4px;">“Do not fear, for I am with you…”</div>
+            <div style="font-size:11px; color:var(--muted); margin-top:6px;">Pray: “God, I feel afraid, but I choose to trust You.”</div>
+          </div>
+          <div style="min-width:190px; padding:10px 12px; border-radius:14px; background:rgba(0,0,0,.6); border:1px solid var(--line);">
+            <div style="font-size:12px; color:var(--accent); font-weight:600;">Philippians 4:6–7</div>
+            <div style="font-size:12px; color:var(--muted); margin-top:4px;">“Do not be anxious about anything…”</div>
+            <div style="font-size:11px; color:var(--muted); margin-top:6px;">Pray: “Here is what I’m worried about today…” and tell God everything.</div>
+          </div>
+          <div style="min-width:190px; padding:10px 12px; border-radius:14px; background:rgba(0,0,0,.6); border:1px solid var(--line);">
+            <div style="font-size:12px; color:var(--accent); font-weight:600;">Psalm 23:1–3</div>
+            <div style="font-size:12px; color:var(--muted); margin-top:4px;">“The Lord is my shepherd; I lack nothing.”</div>
+            <div style="font-size:11px; color:var(--muted); margin-top:6px;">Pray: “Shepherd, lead me step by step today. Restore my soul.”</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 4: Interactive candle -->
+    <section id="section-prayer" class="fade-section">
+      <h3>Light a candle in your heart</h3>
+      <p>
+        You do not always have to say much. Sometimes all you can do is light a
+        small flame and sit quietly in its glow. That is also prayer.
+      </p>
+      <div class="candle-area">
+        Tap below to light a candle for this moment, this season, or this prayer.
+        Every candle is a quiet “Amen”.
+        <div class="candle-row" id="candleRow"></div>
+      </div>
+    </section>
+
+    <footer>
+      This page lives behind a single QR on the wall.
+      Whenever you need to remember, return here, read slowly, and breathe.
+      <p style="margin-top:10px; font-size:11px; opacity:.85;">
+        <strong>Permanent archive:</strong> This memory is stored forever at the Internet Archive.
+        If this link ever stops working, go to <strong>archive.org/details/video_20260313</strong> to find these files and keep this page alive.
+      </p>
+    </footer>
+  </div>
+
+  <!-- Background audio: put gb-audio.mp3 (or bg-audio.mp3) next to this HTML file -->
+  <audio id="bg-audio" loop preload="auto" autoplay playsinline>
+    <source src="gb-audio.mp3" type="audio/mpeg" />
+    <source src="bg-audio.mp3" type="audio/mpeg" />
+  </audio>
+
+  <script>
+    const walkBtn = document.getElementById("walkBtn");
+    const bgAudio = document.getElementById("bg-audio");
+    const memoryVideo = document.getElementById("memoryVideo");
+    const videoCaption = document.getElementById("videoCaption");
+
+    const TARGET_VOLUME = 0.004;
+
+    function fadeInAudio(audioEl, targetVolume, durationMs) {
+      if (!audioEl) return;
+      const start = audioEl.volume || 0;
+      const diff = Math.max(0, targetVolume - start);
+      if (diff === 0) return;
+      const steps = 20;
+      const stepDuration = Math.max(30, Math.floor(durationMs / steps));
+      let current = 0;
+      const timer = setInterval(() => {
+        current += 1;
+        audioEl.volume = Math.min(targetVolume, start + (diff * current / steps));
+        if (current >= steps) clearInterval(timer);
+      }, stepDuration);
+    }
+
+    function startBackgroundAudio() {
+      if (!bgAudio) return;
+      bgAudio.volume = 0.004;
+      bgAudio.play().catch(() => {
+        // Some browsers block until user interaction. We retry on first tap anywhere.
+      });
+      fadeInAudio(bgAudio, TARGET_VOLUME, 1800);
+    }
+
+    // Smooth scroll to the story when tapping the button (no audio trigger here)
+    walkBtn.addEventListener("click", function () {
+      const el = document.getElementById("section-story");
+      if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+
+    // Try autoplay on load, then retry after first interaction if blocked.
+    startBackgroundAudio();
+
+    // Extra safety for mobile: first interaction can start loop audio.
+    document.addEventListener("pointerdown", startBackgroundAudio, { once: true });
+    document.addEventListener("keydown", startBackgroundAudio, { once: true });
+
+    // Simple fade-in on scroll for each section
+    const observer = new IntersectionObserver(entries => {
+      for (const entry of entries) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+          observer.unobserve(entry.target);
+        }
+      }
+    }, { threshold: 0.2 });
+
+    document.querySelectorAll(".fade-section").forEach(sec => observer.observe(sec));
+
+    // Candle interaction
+    const candleRow = document.getElementById("candleRow");
+    const maxCandles = 20;
+    candleRow.addEventListener("click", addCandle);
+    candleRow.parentElement.addEventListener("click", addCandle);
+
+    function addCandle() {
+      if (candleRow.children.length >= maxCandles) return;
+      const c = document.createElement("div");
+      c.className = "candle";
+      candleRow.appendChild(c);
+    }
+
+    // Friendly message if no video source is available.
+    if (memoryVideo) {
+      memoryVideo.addEventListener("error", () => {
+        if (videoCaption) {
+          videoCaption.textContent = "Video file not found. Add memory.mp4 or video.mp4 next to index.html.";
+        }
+      });
+    }
+  </script>
+</body>
+</html>
