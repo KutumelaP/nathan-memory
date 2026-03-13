@@ -326,7 +326,8 @@
           </div>
           <div class="cta-row">
             <button class="btn" id="walkBtn">Tap to walk through this memory</button>
-            <div class="btn-ghost">Scroll at your own pace.</div>
+            <button type="button" class="btn-ghost" id="playMusicBtn" aria-label="Play background music">Tap to play music</button>
+            <div class="btn-ghost" id="scrollHint">Scroll at your own pace.</div>
           </div>
         </div>
       </div>
@@ -650,27 +651,52 @@
       }, stepDuration);
     }
 
+    let audioStarted = false;
     function startBackgroundAudio() {
-      if (!bgAudio) return;
+      if (!bgAudio || audioStarted) return;
       bgAudio.volume = 0.004;
-      bgAudio.play().catch(() => {
-        // Some browsers block until user interaction. We retry on first tap anywhere.
-      });
-      fadeInAudio(bgAudio, TARGET_VOLUME, 1800);
+      var p = bgAudio.play();
+      if (p && typeof p.then === "function") {
+        p.then(function () {
+          audioStarted = true;
+          var btn = document.getElementById("playMusicBtn");
+          if (btn) { btn.textContent = "Music playing"; btn.style.opacity = "0.7"; }
+          fadeInAudio(bgAudio, TARGET_VOLUME, 1800);
+        }).catch(function () {});
+      } else {
+        audioStarted = true;
+        fadeInAudio(bgAudio, TARGET_VOLUME, 1800);
+      }
     }
 
-    // Smooth scroll to the story when tapping the button (no audio trigger here)
+    // Explicit "Tap to play music" button – most reliable on mobile (iOS/Android require user gesture)
+    var playMusicBtn = document.getElementById("playMusicBtn");
+    if (playMusicBtn) {
+      playMusicBtn.addEventListener("click", function () { startBackgroundAudio(); });
+      playMusicBtn.addEventListener("touchend", function (e) { e.preventDefault(); startBackgroundAudio(); }, { passive: false });
+    }
+
+    // Walking button also starts audio so one tap can do both
     walkBtn.addEventListener("click", function () {
-      const el = document.getElementById("section-story");
+      startBackgroundAudio();
+      var el = document.getElementById("section-story");
       if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
     });
+    walkBtn.addEventListener("touchend", function (e) { startBackgroundAudio(); }, { passive: true });
 
-    // Try autoplay on load, then retry after first interaction if blocked.
+    // Try autoplay on load (works on desktop; blocked on most mobiles)
     startBackgroundAudio();
 
-    // Extra safety for mobile: first interaction can start loop audio.
-    document.addEventListener("pointerdown", startBackgroundAudio, { once: true });
-    document.addEventListener("keydown", startBackgroundAudio, { once: true });
+    // First tap anywhere on page starts audio (fallback for mobile)
+    function onceStartAudio() {
+      startBackgroundAudio();
+      document.removeEventListener("pointerdown", onceStartAudio);
+      document.removeEventListener("click", onceStartAudio);
+      document.removeEventListener("touchend", onceStartAudio);
+    }
+    document.addEventListener("pointerdown", onceStartAudio, { once: true });
+    document.addEventListener("click", onceStartAudio, { once: true });
+    document.addEventListener("touchend", onceStartAudio, { once: true, passive: true });
 
     // Simple fade-in on scroll for each section
     const observer = new IntersectionObserver(entries => {
