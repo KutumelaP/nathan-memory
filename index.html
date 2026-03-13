@@ -22,16 +22,31 @@
     body {
       font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
       color: var(--text);
+      overflow-x: hidden;
       background:
         radial-gradient(1200px 700px at 10% 0%, rgba(201,168,106,.18), transparent 55%),
         radial-gradient(1200px 700px at 100% 10%, rgba(112,85,195,.2), transparent 60%),
         linear-gradient(180deg, var(--bg), var(--bg2));
+    }
+    body:before {
+      content: "";
+      position: fixed;
+      inset: -10%;
+      pointer-events: none;
+      background:
+        radial-gradient(500px 240px at 15% 15%, rgba(201,168,106,.08), transparent 70%),
+        radial-gradient(420px 220px at 85% 12%, rgba(120,100,255,.08), transparent 70%);
+      filter: blur(8px);
+      opacity: .9;
+      z-index: 0;
     }
     .page {
       min-height: 100vh;
       max-width: 960px;
       margin: 0 auto;
       padding: 18px 16px 60px;
+      position: relative;
+      z-index: 1;
     }
     header {
       padding: 10px 4px 18px;
@@ -68,6 +83,17 @@
       border: 1px solid rgba(255,255,255,.08);
       background: radial-gradient(circle at top, rgba(201,168,106,.25), rgba(8,9,14,.95));
     }
+    .hero:before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background:
+        linear-gradient(120deg, transparent 0%, rgba(255,255,255,.05) 30%, transparent 55%),
+        radial-gradient(400px 180px at 75% 10%, rgba(201,168,106,.10), transparent 60%);
+      mix-blend-mode: screen;
+      opacity: .7;
+    }
     .hero-inner {
       display: grid;
       grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr);
@@ -87,10 +113,11 @@
       height: 100%;
       object-fit: cover;
       display: block;
-      transform: scale(1.04);
+      transform: scale(1.08) translateY(var(--parallax-y, 0px));
       filter: saturate(1.05);
       opacity: 0;
       animation: fadeInPoster 1.6s ease-out forwards;
+      transition: transform .25s linear;
     }
     .hero-overlay {
       position: absolute;
@@ -122,6 +149,20 @@
       font-style: italic;
       color: var(--accent);
       font-size: 16px;
+    }
+    .hero-kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      width: fit-content;
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(201,168,106,.28);
+      background: rgba(201,168,106,.08);
+      color: #f0ddbb;
+      font-size: 11px;
+      letter-spacing: .16em;
+      text-transform: uppercase;
     }
     .meta {
       margin-top: 6px;
@@ -159,6 +200,43 @@
       padding: 9px 14px;
       font-size: 12px;
     }
+    .choose-paths {
+      margin-top: 18px;
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 10px;
+    }
+    @media (max-width: 760px) {
+      .choose-paths { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+    .path-card {
+      display: block;
+      text-decoration: none;
+      color: inherit;
+      padding: 12px;
+      border-radius: 16px;
+      border: 1px solid var(--line);
+      background: linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
+      box-shadow: 0 12px 30px rgba(0,0,0,.25);
+      transition: transform .2s ease, border-color .2s ease, background .2s ease;
+    }
+    .path-card:hover {
+      transform: translateY(-2px);
+      border-color: rgba(201,168,106,.35);
+      background: linear-gradient(180deg, rgba(201,168,106,.10), rgba(255,255,255,.02));
+    }
+    .path-card strong {
+      display: block;
+      font-size: 13px;
+      margin-bottom: 4px;
+      color: var(--text);
+    }
+    .path-card span {
+      display: block;
+      font-size: 12px;
+      color: var(--muted);
+      line-height: 1.45;
+    }
 
     section {
       margin-top: 26px;
@@ -167,6 +245,15 @@
       border: 1px solid var(--line);
       box-shadow: 0 18px 50px rgba(0,0,0,.6);
       padding: 18px 18px 20px;
+      position: relative;
+      overflow: hidden;
+    }
+    section:before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background: linear-gradient(180deg, rgba(255,255,255,.02), transparent 30%);
     }
     section h3 {
       margin: 0 0 8px;
@@ -217,6 +304,63 @@
       border: 1px solid rgba(201,168,106,.3);
       font-size: 14px;
       line-height: 1.7;
+    }
+    .memory-grid {
+      margin-top: 12px;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+    }
+    @media (max-width: 760px) {
+      .memory-grid { grid-template-columns: 1fr; }
+    }
+    .memory-card {
+      border-radius: 16px;
+      border: 1px solid var(--line);
+      background: rgba(0,0,0,.55);
+      padding: 12px;
+      transition: border-color .2s ease, transform .2s ease, background .2s ease;
+    }
+    .memory-card[open] {
+      border-color: rgba(201,168,106,.35);
+      background: linear-gradient(180deg, rgba(201,168,106,.10), rgba(0,0,0,.58));
+      transform: translateY(-2px);
+    }
+    .memory-card summary {
+      list-style: none;
+      cursor: pointer;
+    }
+    .memory-card summary::-webkit-details-marker { display: none; }
+    .memory-card h4 {
+      margin: 0 0 4px;
+      font-size: 13px;
+      color: var(--accent);
+    }
+    .memory-card .tease {
+      margin: 0;
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.55;
+    }
+    .memory-card .full {
+      margin-top: 10px;
+      padding-top: 10px;
+      border-top: 1px solid rgba(255,255,255,.08);
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.65;
+    }
+    .section-tag {
+      display: inline-block;
+      margin-bottom: 8px;
+      font-size: 11px;
+      color: #f0ddbb;
+      background: rgba(201,168,106,.08);
+      border: 1px solid rgba(201,168,106,.25);
+      border-radius: 999px;
+      padding: 4px 9px;
+      letter-spacing: .12em;
+      text-transform: uppercase;
     }
 
     .candle-area {
@@ -309,6 +453,7 @@
           <div class="hero-overlay"></div>
         </div>
         <div class="hero-text">
+          <div class="hero-kicker">For Nathan</div>
           <div class="script-line">“My son, never stop praying.”</div>
           <p>
             This frame on the wall is more than paper and ink. It is a doorway
@@ -328,6 +473,24 @@
             <button class="btn" id="walkBtn">Tap to walk through this memory</button>
             <button type="button" class="btn-ghost" id="playMusicBtn" aria-label="Play background music">Tap to play music</button>
             <div class="btn-ghost" id="scrollHint">Scroll at your own pace.</div>
+          </div>
+          <div class="choose-paths">
+            <a class="path-card" href="#section-story">
+              <strong>Start with us</strong>
+              <span>The drawing, the prayer, the first memory.</span>
+            </a>
+            <a class="path-card" href="#section-wish">
+              <strong>Hear our wish</strong>
+              <span>The blessing Peter and Lerato carry for Nathan.</span>
+            </a>
+            <a class="path-card" href="#section-media">
+              <strong>Watch the promise</strong>
+              <span>The Deuteronomy reflection in motion.</span>
+            </a>
+            <a class="path-card" href="#section-scriptures">
+              <strong>Find strength today</strong>
+              <span>Verses for the days that feel heavy.</span>
+            </a>
           </div>
         </div>
       </div>
@@ -503,33 +666,46 @@
 
     <!-- SECTION 1D: Pick a memory (fun cards) -->
     <section id="section-memories" class="fade-section">
+      <div class="section-tag">Open a card</div>
       <h3>Pick a memory</h3>
       <p>
         Not every memory is serious. Some are simply here to make you smile,
         laugh, and remember the lighter parts of love.
       </p>
-      <div style="margin-top:12px; display:flex; flex-wrap:wrap; gap:10px;">
-        <div style="flex:1 1 180px; min-width:0; border-radius:16px; border:1px solid var(--line); background:rgba(0,0,0,.6); padding:10px 12px;">
-          <div style="font-size:13px; font-weight:600; color:var(--accent); margin-bottom:4px;">The funniest day</div>
-          <p style="margin:0; font-size:13px; color:var(--muted);">
+      <div class="memory-grid">
+        <details class="memory-card">
+          <summary>
+            <h4>The funniest day</h4>
+            <p class="tease">A memory that should make him smile before he even opens it.</p>
+          </summary>
+          <div class="full">
             Think of a moment when we laughed so hard we could not breathe.
-            One day we will write that story here, with a photo, so it never fades.
-          </p>
-        </div>
-        <div style="flex:1 1 180px; min-width:0; border-radius:16px; border:1px solid var(--line); background:rgba(0,0,0,.6); padding:10px 12px;">
-          <div style="font-size:13px; font-weight:600; color:var(--accent); margin-bottom:4px;">Most proud of you</div>
-          <p style="margin:0; font-size:13px; color:var(--muted);">
+            One day we will write that story here in full, with a photo and the
+            little details that only family remembers.
+          </div>
+        </details>
+        <details class="memory-card">
+          <summary>
+            <h4>Most proud of you</h4>
+            <p class="tease">A place for the day courage showed itself clearly.</p>
+          </summary>
+          <div class="full">
             This space is for the day you chose what was right even when it was hard,
-            so you can always remember your own courage.
-          </p>
-        </div>
-        <div style="flex:1 1 180px; min-width:0; border-radius:16px; border:1px solid var(--line); background:rgba(0,0,0,.6); padding:10px 12px;">
-          <div style="font-size:13px; font-weight:600; color:var(--accent); margin-bottom:4px;">Did you know?</div>
-          <p style="margin:0; font-size:13px; color:var(--muted);">
+            so you can return to that moment and remember your own courage when life
+            asks it of you again.
+          </div>
+        </details>
+        <details class="memory-card">
+          <summary>
+            <h4>Did you know?</h4>
+            <p class="tease">A quiet family fact waiting to surprise you.</p>
+          </summary>
+          <div class="full">
             Did you know there was a time when one of us almost gave up on a dream?
-            One day we will tell you how God turned that story around.
-          </p>
-        </div>
+            One day we will tell you how God turned that story around, because even
+            the stories that nearly broke us can become part of our testimony.
+          </div>
+        </details>
       </div>
     </section>
 
@@ -633,6 +809,7 @@
     const bgAudio = document.getElementById("bg-audio");
     const memoryVideo = document.getElementById("memoryVideo");
     const videoCaption = document.getElementById("videoCaption");
+    const heroImage = document.querySelector(".hero-image img");
 
     const TARGET_VOLUME = 0.004;
 
@@ -709,6 +886,15 @@
     }, { threshold: 0.2 });
 
     document.querySelectorAll(".fade-section").forEach(sec => observer.observe(sec));
+
+    // Gentle parallax to make the poster feel more alive.
+    function updateHeroParallax() {
+      if (!heroImage) return;
+      var offset = Math.min(16, Math.max(-4, window.scrollY * 0.04));
+      heroImage.style.setProperty("--parallax-y", offset + "px");
+    }
+    updateHeroParallax();
+    window.addEventListener("scroll", updateHeroParallax, { passive: true });
 
     // Candle interaction
     const candleRow = document.getElementById("candleRow");
