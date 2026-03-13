@@ -363,6 +363,56 @@
       text-transform: uppercase;
     }
 
+    .timeline-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    .timeline-list li {
+      margin-bottom: 10px;
+    }
+    .timeline-list li:last-child { margin-bottom: 0; }
+    .timeline-item {
+      border-radius: 14px;
+      border: 1px solid var(--line);
+      background: rgba(0,0,0,.5);
+      padding: 10px 12px;
+      transition: border-color .2s ease, background .2s ease;
+    }
+    .timeline-item[open] {
+      border-color: rgba(201,168,106,.3);
+      background: rgba(0,0,0,.6);
+    }
+    .timeline-item summary {
+      list-style: none;
+      cursor: pointer;
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+    .timeline-item summary::-webkit-details-marker { display: none; }
+    .timeline-item summary strong { color: var(--accent); }
+    .timeline-item .full {
+      margin-top: 12px;
+      padding-top: 12px;
+      border-top: 1px solid rgba(255,255,255,.08);
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.65;
+    }
+    .timeline-item .full p { margin: 0 0 10px; }
+    .timeline-item .full p:last-child { margin-bottom: 0; }
+    .timeline-item .verse {
+      margin-top: 12px;
+      padding-top: 10px;
+      border-top: 1px solid rgba(255,255,255,.08);
+      font-size: 12px;
+      color: var(--accent);
+      font-style: italic;
+      line-height: 1.5;
+    }
+    .timeline-item .verse cite { font-style: normal; font-size: 11px; color: var(--muted); }
+
     .candle-area {
       margin-top: 12px;
       padding: 12px 12px 10px;
@@ -531,33 +581,62 @@
     <section id="section-journey" class="fade-section">
       <h3>My road so far &mdash; Peter Kutumela</h3>
       <p>
-        Nathan, this is a small map of my life so far. It is not perfect,
-        but it is honest. I want you to know the road I walked before you
-        arrived, and the road I am still walking beside you.
+        Nathan, this is not just a timeline. It is part of the spiritual journey
+        that shaped me before you arrived, and the faith I hope you will hold on to.
       </p>
       <div class="split" style="margin-top:14px;">
         <div>
-          <div style="border-radius:16px; border:1px solid var(--line); padding:10px 12px; background:rgba(0,0,0,.55);">
-            <div style="font-size:13px; color:var(--accent); font-weight:600; margin-bottom:6px;">Timeline</div>
-            <ul style="margin:0; padding-left:16px; font-size:13px; color:var(--muted); line-height:1.7;">
-              <li><strong>Growing up:</strong> Learning to pray, to share, and to survive when money was tight.</li>
-              <li><strong>Young man:</strong> Working, making mistakes, and learning that God can rebuild what I thought was lost.</li>
-              <li><strong>The day you arrived:</strong> My whole idea of “future” changed. It suddenly had your face.</li>
-              <li><strong>Hard seasons:</strong> Times when I almost gave up, but prayer and family pulled me back.</li>
-              <li><strong>Today:</strong> Still learning, still trusting, and trying to build something strong enough for you to stand on.</li>
+          <div style="font-size:13px; color:var(--accent); font-weight:600; margin-bottom:8px;">Timeline</div>
+            <ul class="timeline-list">
+              <li>
+                <details class="memory-card timeline-item">
+                  <summary><strong>Learning to pray:</strong> Life is spiritual—everything that happens, the moments we live in, and what we receive often begin in the spirit before they show up in the natural. Tap to read more.</summary>
+                  <div class="full">
+                    <p>Growing up, I learned that life is spiritual. Many things do not begin in the natural first. They begin in the spirit, and only later reveal themselves in the life we can see and touch.</p>
+                    <p>I say this because my mother grew up in the ZCC church, which I call the university of spirituality. She used to ask me to go to church, but I had no interest. Then one day she came back from church smiling and said, "My son, I received a prophecy that your time will come. I should leave you alone for now."</p>
+                    <p>And truly, my time came. I began going to church and praying with all my heart. I trusted in the Lord and in the things He revealed to me.</p>
+                    <p>He told me I would get my degree for free, even when I was struggling in high school, and I did. He told me I would drive a silver VW Polo, and five years later I got it. He told me that my firstborn would be a boy, and here you are. He showed me your mother when she was still in varsity, and years later I met her. He told me about my first job, and I got it.</p>
+                    <p>These are only a few examples. God gave me glimpses of my life before I lived it. Many of the things I now hold in my hands, I first received in the spirit.</p>
+                    <p>I share this with you so that you will understand that your life is not random. The fact that I knew about you years before you were born reminds me that your journey, too, is already known by God, waiting for you to walk in it.</p>
+                    <p class="verse">"Before I formed you in the womb I knew you." <cite>— Jeremiah 1:5</cite></p>
+                  </div>
+                </details>
+              </li>
+              <li>
+                <details class="memory-card timeline-item">
+                  <summary><strong>Young man:</strong> Working, making mistakes, and learning that God can rebuild what I thought was lost.</summary>
+                  <p class="verse">"I will restore to you the years that the swarming locust has eaten." <cite>— Joel 2:25</cite></p>
+                </details>
+              </li>
+              <li>
+                <details class="memory-card timeline-item">
+                  <summary><strong>The day you arrived:</strong> My whole idea of "future" changed. It suddenly had your face.</summary>
+                  <p class="verse">"Behold, children are a heritage from the Lord." <cite>— Psalm 127:3</cite></p>
+                </details>
+              </li>
+              <li>
+                <details class="memory-card timeline-item">
+                  <summary><strong>Hard seasons:</strong> Times when I almost gave up, but prayer and family pulled me back.</summary>
+                  <p class="verse">"Though it tarries, wait for it; for it will surely come." <cite>— Habakkuk 2:3</cite></p>
+                </details>
+              </li>
+              <li>
+                <details class="memory-card timeline-item">
+                  <summary><strong>Today:</strong> Still learning, still trusting, and trying to build something strong enough for you to stand on.</summary>
+                  <p class="verse">"Trust in the Lord with all your heart." <cite>— Proverbs 3:5</cite></p>
+                </details>
+              </li>
             </ul>
-          </div>
         </div>
         <div>
           <div class="prayer">
-            Lord, thank You for every season that shaped Peter Kutumela.
-            Thank You that none of his story is wasted. Use his journey to
-            guide Nathan, so that he can walk further, make wiser choices,
-            and know You even more deeply.
+            Lord, thank You for every season that shaped me. Thank You that
+            none of my story is wasted. Use my journey to guide Nathan—so
+            that he can walk further, make wiser choices, and know You even
+            more deeply.
           </div>
           <p style="margin-top:12px; font-size:13px; color:var(--muted);">
-            One day you will add your own milestones here, Nathan. This story
-            is still being written, and yours is only beginning.
+            Each season above has a verse that walked with me. Hold on to prayer, Nathan.
           </p>
         </div>
       </div>
