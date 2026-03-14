@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Who He Is — For Nathan</title>
+  <style>
+    :root {
+      --bg: #05070c;
+      --bg2: #0f1119;
+      --accent: #c9a86a;
+      --text: #f3f3f6;
+      --muted: #b3b6c2;
+      --line: rgba(255,255,255,.09);
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; min-height: 100%; }
+    body {
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(1200px 700px at 10% 0%, rgba(201,168,106,.18), transparent 55%),
+        linear-gradient(180deg, var(--bg), var(--bg2));
+    }
+    .page {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 24px 16px 60px;
+    }
+    .gate {
+      min-height: 60vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 20px;
+    }
+    .gate h1 {
+      font-size: 20px;
+      margin: 0 0 8px;
+      color: var(--text);
+    }
+    .gate p {
+      font-size: 14px;
+      color: var(--muted);
+      margin: 0 0 24px;
+      max-width: 360px;
+    }
+    .gate input {
+      width: 100%;
+      max-width: 200px;
+      padding: 12px 16px;
+      font-size: 16px;
+      text-align: center;
+      letter-spacing: 2px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: rgba(0,0,0,.5);
+      color: var(--text);
+      margin-bottom: 12px;
+    }
+    .gate input:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 0 2px rgba(201,168,106,.2);
+    }
+    .gate button {
+      padding: 10px 24px;
+      font-size: 14px;
+      background: var(--accent);
+      color: var(--bg);
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      font-weight: 600;
+    }
+    .gate button:hover { opacity: .9; }
+    .gate .error {
+      font-size: 13px;
+      color: #e07;
+      margin-top: 10px;
+      display: none;
+    }
+    .gate .error.show { display: block; }
+
+    .content { display: none; }
+    .content.unlocked { display: block; }
+
+    .content a.back {
+      display: inline-block;
+      font-size: 13px;
+      color: var(--accent);
+      text-decoration: none;
+      margin-bottom: 24px;
+    }
+    .content a.back:hover { text-decoration: underline; }
+
+    .content h2 {
+      font-size: 18px;
+      margin: 28px 0 12px;
+      color: var(--accent);
+    }
+    .content h2:first-of-type { margin-top: 0; }
+    .content p, .content .block {
+      font-size: 15px;
+      line-height: 1.7;
+      color: var(--muted);
+      margin: 0 0 14px;
+    }
+    .content .block {
+      border-radius: 14px;
+      border: 1px solid var(--line);
+      background: rgba(0,0,0,.45);
+      padding: 16px 18px;
+      margin-bottom: 20px;
+    }
+    .content .block h3 {
+      font-size: 14px;
+      margin: 0 0 10px;
+      color: var(--accent);
+    }
+    .content .block p { margin: 0 0 10px; }
+    .content .block p:last-child { margin-bottom: 0; }
+    .content .note {
+      font-size: 12px;
+      color: var(--muted);
+      opacity: .8;
+      margin-top: 24px;
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <div id="gate" class="gate">
+      <h1>A letter for you</h1>
+      <p>This page is for Nathan. If that’s you, enter the password you were given.</p>
+      <input type="password" id="pw" placeholder="Password" autocomplete="off" inputmode="numeric" maxlength="10" />
+      <button type="button" id="btn">Enter</button>
+      <p id="err" class="error">Wrong password. Try again.</p>
+      <p style="margin-top: 20px; font-size: 12px; color: var(--muted); opacity: .85;">Do not share the password with anyone.</p>
+    </div>
+
+    <div id="content" class="content">
+      <!-- content loaded after password -->
+    </div>
+  </div>
+  <script id="payload" type="text/plain">DVQQX0tWVwgSXldXVE0eX01eXRcQVFVSQkYNFVtSUl4SCakTc1RTXBlHXhVEX1wTXFBdWEtKDRpRCTM5DV0CCW5bXhVJWEwTUEdVCxZbAws6C0kNOxUQY1FaQhVZRBlEWVREF05WEUZVUhlaXxVJWEwTUFtUF05bUEEQQFwTRlReQxlKXkAQQ1YTUlRCRUATRlxEXxlKXkAePRkTaFpFRRlfWFNVGxlKXkBCF1pbUEdRVE1WQxkQVldXEUFYUhlARVpCThl0XlEQXkoTRkdZQ1BdVhVZWRlKXkAkQFwTWVpcUxlaRT8QF1FWQ1AQRFYTSFpFF1hfRlRJRBlbUENVF1gTQVlRVFwTRVoQRVxeVFhSUksTRl1fF0BcRBVRRVwdOwkfRwc5OwlUXk8TUllRREoOE1dcWFpYEws6FxkPWQYOYFFcEUxfQhlSQ1AMGFEADz8QFwVDD2ZEWEtKEUFfF1tWEUJCXk1HVFseCxZDDz8MGF1aRws6PQVbAwtnWEtXQhVfQVxBEUxfQksTV0BEQktWDRpYBQc5DUUOPRkTd0dfWhlHWFhVF01cEUFZWlwTRV1VF3VcQ1EQUFBFVEYQQkoTRlpCU0ofEVFCUlheQhkQWEsTQUdfR1FWUlxVRBlSU1pFQxlKXkBCPRkTXVxWUhcTZlAQQEtaRVAQQ1FWXBVYUktWEUZfF0BcRBVbWVZEEUJYVk0TRlRDF0pDXl5VWRlcR1BCF0BcRCFDWBlKXkAQWVxFVEc6FxlVXkdXUk0TRl1fF0BcRBVRRVwTWFsQf1BAEVBJUkoTUFtUF05bVEdVF3FWEVxDF01SWlxeUBlKXkAePQUcQQs6PQVXWEMQVFVSQkYNFVtfXlZbFQc5ERUMXwoNZlpCU0oTXkNVRRlKXkBCF1VaV1AMGFEADz8QFwVDDz8QFxkTc1BWWEtWEUxfQhlEVEdVF1tcQ1scF01bVBV8WEtXEVRcRVxSVUwQXFdWRhVJWEwdEWJVF1FcXVEQUk9WQ0wQQFZBVRV4UhlbUEY6FxkTEVJZQVxdEUBDF19cQxVJWEwTWFsQR0tSSFBCGxlSX1EQQFwTXVBRQVwTRV1VWhlbVEdVF19cQxVJWEwdEWJYUlcTRV1VF01aXFA6FxkTEVZfWlxAHRVJWEwTRlxcWxlEUFlbF1BdEUFYUlQdOxUQCxZDDz8MGF1aRws6C0kTUllRREoOE1tfQ1wRDz8QF3BVEUFYXkoTQVRXUhlcQxVEX1wTXFRZWRleVFhfRUATXVxeXBlWR1BCF0pHXkVDF05cQ15ZWV4fEUxfQksTUlpAThlaQhVbUklHEVREF01bVBV5WU1WQ1tVQxlyQ1ZYXk9WHxV3WBlHXhUMRE1BXltXCVhBUl1ZQVwdXkdXCxZARUdfWV4NEVReUxlAVFRCVFETV1pCFwVARUdfWV4NR1xUUlZsAwUCAQkAAAYMGEpHQ1peUAcTRVoQUVBdVRVZQxcTelBVRxlHWVREF3B3JVxEEEoTSFpFRRlEUEwQVVhQWhVYUktWHz8MGEkN</script>
+
+  <script>
+    (function () {
+      var STORAGE_KEY = 'nathan_who_he_is';
+      var PASSWORD = '150793';
+
+      var gate = document.getElementById('gate');
+      var content = document.getElementById('content');
+      var input = document.getElementById('pw');
+      var btn = document.getElementById('btn');
+      var err = document.getElementById('err');
+
+      function decrypt(encB64, pw) {
+        try {
+          var bin = atob(encB64);
+          var out = '';
+          for (var i = 0; i < bin.length; i++) {
+            out += String.fromCharCode(bin.charCodeAt(i) ^ pw.charCodeAt(i % pw.length));
+          }
+          return out;
+        } catch (e) { return ''; }
+      }
+
+      function unlock() {
+        var payloadEl = document.getElementById('payload');
+        if (payloadEl && payloadEl.textContent) {
+          content.innerHTML = decrypt(payloadEl.textContent.trim(), PASSWORD);
+        }
+        gate.style.display = 'none';
+        content.classList.add('unlocked');
+        try { sessionStorage.setItem(STORAGE_KEY, '1'); } catch (e) {}
+      }
+
+      function fail() {
+        err.classList.add('show');
+        input.value = '';
+        input.focus();
+      }
+
+      function check() {
+        var val = (input.value || '').trim();
+        if (val === PASSWORD) {
+          err.classList.remove('show');
+          unlock();
+        } else {
+          fail();
+        }
+      }
+
+      if (sessionStorage.getItem(STORAGE_KEY) === '1') {
+        unlock();
+        return;
+      }
+
+      btn.addEventListener('click', check);
+      input.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter') check();
+      });
+      input.focus();
+    })();
+  </script>
+</body>
+</html>

@@ -482,6 +482,34 @@
       opacity: 1;
       transform: translateY(0);
     }
+
+    .float-letter {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 100;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 18px;
+      background: linear-gradient(135deg, var(--accent), #b8955a);
+      color: var(--bg);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 600;
+      border-radius: 999px;
+      box-shadow: 0 4px 20px rgba(201,168,106,.4);
+      border: 1px solid rgba(255,255,255,.2);
+      transition: transform .2s ease, box-shadow .2s ease;
+    }
+    .float-letter:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 24px rgba(201,168,106,.5);
+    }
+    .float-letter::before {
+      content: "✉";
+      font-size: 16px;
+    }
   </style>
 </head>
 <body>
@@ -870,11 +898,13 @@
       This page lives behind a single QR on the wall.
       Whenever you need to remember, return here, read slowly, and breathe.
       <p style="margin-top:10px; font-size:11px; opacity:.85;">
-        <strong>Permanent archive:</strong> This memory is stored forever at the Internet Archive.
-        If this link ever stops working, go to <strong>archive.org/details/video_20260313</strong> to find these files and keep this page alive.
+        <strong>If this link ever stops working:</strong> This memory is backed up for the long term at the Internet Archive.
+        Go to <strong>archive.org</strong> and search for <strong>video_20260313</strong> to find it. Keep that ID somewhere safe—it’s your way back here for decades to come.
       </p>
     </footer>
   </div>
+
+  <a href="who-he-is.html" class="float-letter" aria-label="A letter for you">A letter for you</a>
 
   <!-- Background audio: put gb-audio.mp3 (or bg-audio.mp3) next to this HTML file -->
   <audio id="bg-audio" loop preload="auto" autoplay playsinline>

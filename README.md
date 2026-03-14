@@ -58,3 +58,47 @@ cd C:\food_marketplace_app\web_solutions\qr-memory-brain
 .\make-qr.ps1 -Url "https://archive.org/details/YOUR_ITEM_ID" -OutFile "memory-qr.png"
 ```
 
+---
+
+## Making it last decades
+
+No single website is guaranteed to exist in 10 or 20 years. The best way to keep this memory for Nathan is **multiple copies in different places**.
+
+### 1. Internet Archive (permanent backup)
+- Go to **archive.org** and sign in (free account).
+- Your item is: **archive.org/details/video_20260313**
+- **Whenever you add or change content** (new story, new revelations, new media), upload the full folder again to that item (or create a new item, e.g. `nathan-memory-2027`) so the latest version is preserved.
+- The Archive is built for long-term preservation. Keep the item ID written down somewhere Nathan can find it (e.g. with the framed photo or in a family document).
+
+### 2. GitHub (current live site)
+- The site runs at **https://kutumelap.github.io/nathan-memory/**
+- Keep the repo; if GitHub or Pages ever change, you still have the files in the repo and can re-upload them elsewhere.
+
+### 3. Your own backups (at least two places)
+- **ZIP the whole folder** (index.html, who-he-is.html, poster.jpg, audio, video, all assets).
+- Save the ZIP in at least two places, e.g.:
+  - A cloud folder (Google Drive, OneDrive, iCloud, etc.)
+  - An external hard drive or USB stick kept with important papers
+- **Refresh the ZIP whenever you update the site** so the backup is current.
+- Tell one other family member where these backups are so they’re not lost.
+
+### 4. Optional: print or PDF
+- Print the main page and the letter page (after entering the password) and keep them in a folder with other important family documents.
+- Or save as PDF from the browser (Print → Save as PDF) and store the PDFs in the same backup places.
+
+### What to tell Nathan
+- “If the link on the QR ever stops working, search the Internet Archive for **video_20260313** (or the item ID we gave you). We also keep a backup at [wherever you store it].”
+- The footer on the main page already points him to the Archive; you can add a handwritten note near the frame with the Archive item ID and the password for the letter.
+
+---
+
+## Letter page (who-he-is.html)
+
+The "A letter for you" page is **password-protected** and the letter content is **encrypted** in the page. Viewing the HTML source or downloading the file does not show the real letter—only after entering the correct password (150793) does the browser decrypt and show it. So even if someone technical opens the file, they see encrypted data, not the message.
+
+### When you want to update the letter
+1. Edit **encrypt-content.js**: replace the `content` string with your new letter HTML (same structure: back link, "Who you are", blocks, "Words over your future", archive note).
+2. Run: `node encrypt-content.js`
+3. Copy the printed base64 string.
+4. In **who-he-is.html**, find the `<script id="payload" type="text/plain">` tag and replace the long string inside it with the new base64 string.
+5. Save and push to GitHub (and re-upload to Archive.org if you use that backup).
