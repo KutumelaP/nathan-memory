@@ -149,7 +149,6 @@
 
   <script>
     (function () {
-      var STORAGE_KEY = 'nathan_who_he_is';
       var PASSWORD = '150793';
 
       var gate = document.getElementById('gate');
@@ -176,7 +175,6 @@
         }
         gate.style.display = 'none';
         content.classList.add('unlocked');
-        try { sessionStorage.setItem(STORAGE_KEY, '1'); } catch (e) {}
       }
 
       function fail() {
@@ -193,11 +191,6 @@
         } else {
           fail();
         }
-      }
-
-      if (sessionStorage.getItem(STORAGE_KEY) === '1') {
-        unlock();
-        return;
       }
 
       btn.addEventListener('click', check);
